@@ -128,4 +128,7 @@ Para compilar o código, você precisará instalar as seguintes bibliotecas atra
 
 Agradecemos às seguintes pessoas que contribuíram para este projeto:
 
-  * **Diogo Santos Rodrigues** - [@username](https://www.google.com/search?q=https://github.com/username)
+  * **Diogo Santos Rodrigues** - [@dioguit0s](https://github.com/dioguit0s/)
+  * **Gustavo Sgrignoli Marmo** - [@gustavomarmo](https://github.com/gustavomarmo)
+  * **Leonardo Rosario Teixeira** - [@leonardorosario](https://github.com/leonardorosario)
+  * **Ryan Corazza Alvarenga** - [@aishiterai](https://github.com/aishiteirai)
