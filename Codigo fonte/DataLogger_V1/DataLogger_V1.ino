@@ -43,7 +43,7 @@ float trigger_l_min = 0, trigger_l_max = 30.0; // Adjustable
 // Define menu text
 const char g_menuDataHora[] PROGMEM = {"1. Data e Hora"};
 const char g_menuSensores[] PROGMEM = {"2. Sensores"};
-const char g_menuSensorHum[] PROGMEM = {"2.1 Hum e Temp"};
+const char g_menuSensorHum[] PROGMEM = {"2.1 Consultar sensores"};
 const char g_menuSensorLum[] PROGMEM = {"2.2 Ajuste Luz"};
 const char g_menuViewLog[] PROGMEM = {"3. Ver Log"};
 
