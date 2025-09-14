@@ -132,3 +132,4 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
   * **Gustavo Sgrignoli Marmo** - [@gustavomarmo](https://github.com/gustavomarmo)
   * **Leonardo Rosario Teixeira** - [@leonardorosario](https://github.com/leonardorosario)
   * **Ryan Corazza Alvarenga** - [@aishiterai](https://github.com/aishiteirai)
+  * **Bianca Ricci Lima** - [@biaricci](https://github.com/biaricci)
