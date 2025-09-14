@@ -1,15 +1,15 @@
 #include <LiquidCrystal_I2C.h>  // Biblioteca para LCD I2C
 #include <RTClib.h>             // Biblioteca para Relógio em Tempo Real
 #include <Wire.h>               // Biblioteca para comunicação I2C
-#include <EEPROM.h>
-#include "DHT.h"
+#include <EEPROM.h>             // Biblioteca para memoria EEPROM
+#include "DHT.h"                // Biblioteca para o sensor DHT11
 #include "CMBMenu.hpp" // ** menu **
 
 // --- Global Hardware and Settings ---
 #define UTC_OFFSET -3   // Correct offset for Brazil (BRT)
 #define DHTPIN 2
 #define DHTTYPE DHT11
-#define BUZZER_PIN 8    // --- ADDED --- Define the pin for the buzzer
+#define BUZZER_PIN 8   
 DHT dht(DHTPIN, DHTTYPE);
 
 // Digital Pins
@@ -80,7 +80,7 @@ void adjustLumSettings();
 void showLog();
 void getNextAddress();
 void checkAndLogSensors();
-void handleAlarm(bool isActive); // --- ADDED --- Forward declaration for the new alarm function
+void handleAlarm(bool isActive); 
 
 // ********************************************
 // SETUP
@@ -91,7 +91,7 @@ void setup() {
     pinMode(ledOk, OUTPUT);
     pinMode(ledFailure, OUTPUT);
     pinMode(LED_BUILTIN, OUTPUT);
-    pinMode(BUZZER_PIN, OUTPUT); // --- ADDED --- Set the buzzer pin as an output
+    pinMode(BUZZER_PIN, OUTPUT); 
 
     lcd.init();
     lcd.backlight();
@@ -116,7 +116,7 @@ void setup() {
     // Build menu and get the initial display text
     const char* info;
     g_Menu.buildMenu(info);
-    g_Menu.printMenu(); // Optional: prints the full tree to Serial Monitor
+    g_Menu.printMenu(); 
 
     // ** menu **
     // Print the initial menu entry to the LCD
@@ -130,7 +130,7 @@ void loop() {
     // Check sensors once per minute
     checkAndLogSensors();
 
-    // --- Menu Logic (copied from the example) ---
+    // --- Menu Logic  ---
     int fid = 0;
     const char* info;
     bool layerChanged = false;
@@ -172,7 +172,7 @@ void loop() {
 // ********************************************
 
 /**
- * @brief Prints the current menu item text to the first line of the LCD.
+ * Prints the current menu item text to the first line of the LCD.
  * This function is called every time a navigation key is pressed.
  */
 void printMenuEntry(const char* f_Info) {
@@ -190,8 +190,7 @@ void printMenuEntry(const char* f_Info) {
 }
 
 /**
- * @brief Reads joystick and buttons to determine which key was pressed.
- * Matches the logic from your previous code.
+ * Reads joystick and buttons to determine which key was pressed.
  */
 KeyType getKey() {
     KeyType key = keyNone;
@@ -207,7 +206,7 @@ KeyType getKey() {
 }
 
 /**
- * @brief ACTION: Displays the current time on the second line of the LCD.
+ * Displays the current time on the second line of the LCD.
  */
 void showDataHora() {
     DateTime now = RTC.now();
@@ -221,7 +220,7 @@ void showDataHora() {
 }
 
 /**
- * @brief ACTION: Displays the current temp/humidity on the second line.
+ * Displays the current temp/humidity on the second line.
  */
 void showHumETemp() {
     int h = dht.readHumidity();
@@ -237,7 +236,7 @@ void showHumETemp() {
 }
 
 /**
- * @brief ACTION: Allows adjustment of the light trigger. This is a special
+ * Allows adjustment of the light trigger. This is a special
  * case that needs its own temporary loop.
  */
 void adjustLumSettings() {
@@ -271,7 +270,7 @@ void adjustLumSettings() {
 }
 
 /**
- * @brief ACTION: Dumps the EEPROM log to the Serial Monitor.
+ * Dumps the EEPROM log to the Serial Monitor.
  */
 void showLog() {
     lcd.clear();
@@ -330,8 +329,8 @@ void showLog() {
 
 /**
  * --- ADDED ---
- * @brief Activates or deactivates the failure LED and buzzer.
- * @param isActive True to activate the alarm, false to deactivate.
+ *Activates or deactivates the failure LED and buzzer.
+ * True to activate the alarm, false to deactivate.
  */
 void handleAlarm(bool isActive) {
     digitalWrite(ledFailure, isActive);
@@ -346,8 +345,7 @@ void handleAlarm(bool isActive) {
 
 
 /**
- * --- MODIFIED ---
- * @brief Reads sensors, checks if values are within triggers, and logs if they are not.
+ *Reads sensors, checks if values are within triggers, and logs if they are not.
  * Also controls the alarm (LEDs and Buzzer).
  */
 void checkAndLogSensors() {
