@@ -60,6 +60,9 @@ Este projeto consiste em um dispositivo de registro de dados (data logger) dedic
 | Joystick (Eixo X) | `A0` |
 | Sensor LDR | `A2` |
 
+<img width="983" height="868" alt="image" src="https://github.com/user-attachments/assets/f29fc13e-2b62-43e9-8f06-a86e41a147e8" />
+
+
 -----
 
 ## 🚀 Como Funciona
