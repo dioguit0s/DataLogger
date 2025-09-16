@@ -98,6 +98,9 @@ O usuário navega pelo menu usando um joystick e dois botões (`Entra` e `Volta`
       * **2.2 Ajuste Luz**: Permite aumentar ou diminuir o valor máximo do trigger de luminosidade.
   * **3. Ver Log**: Envia todos os registros armazenados na EEPROM para o **Monitor Serial** do Arduino IDE, formatados de maneira legível.
 
+### Video demonstrativo
+ https://youtube.com/shorts/Jy3Repk7K6I?si=oD8lZE54iMaD-ZcR
+
 -----
 
 ## 📚 Bibliotecas
