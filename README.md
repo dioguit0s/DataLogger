@@ -68,9 +68,9 @@ Este projeto consiste em um dispositivo de registro de dados (data logger) dedic
 
 O `loop()` principal verifica os sensores a cada minuto. Os valores de temperatura, umidade e luminosidade são comparados com as faixas de operação seguras (triggers):
 
-  * **Faixa de Temperatura**: $15 °C \< T \< 25 °C
-  * **Faixa de Umidade**: $30% \< U \< 50%$
-  * **Faixa de Luminosidade**: $0 \< L \< 30%$ (valor máximo ajustável)
+  * **Faixa de Temperatura**: 15 °C \< T \< 25 °C
+  * **Faixa de Umidade**: 30% \< U \< 50%
+  * **Faixa de Luminosidade**: 0 \< L \< 30% (valor máximo ajustável)
 
 Se qualquer medição estiver fora desses limites, a função `handleAlarm()` é chamada, ativando o **LED vermelho** e o **buzzer**. Caso contrário, o **LED verde** permanece aceso.
 
