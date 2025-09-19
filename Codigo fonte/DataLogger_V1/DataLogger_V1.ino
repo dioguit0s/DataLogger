@@ -43,7 +43,7 @@ float trigger_l_min = 0, trigger_l_max = 30.0; // Adjustable
 // Define menu text
 const char g_menuDataHora[] PROGMEM = {"1. Data e Hora"};
 const char g_menuSensores[] PROGMEM = {"2. Sensores"};
-const char g_menuSensorHum[] PROGMEM = {"2.1 Consultar sensores"};
+const char g_menuSensorHum[] PROGMEM = {"2.1 Ver sensores"};
 const char g_menuSensorLum[] PROGMEM = {"2.2 Ajuste Luz"};
 const char g_menuViewLog[] PROGMEM = {"3. Ver Log"};
 
@@ -82,6 +82,33 @@ void getNextAddress();
 void checkAndLogSensors();
 void handleAlarm(bool isActive); 
 
+// --- CARACTERES CUSTOMIZADOS (APENAS FRAMES A, B e C) ---
+
+// --- FRAME A (Imagem 1) ---
+byte frameA_0_0[] = { B00000, B00000, B00000, B00000, B00000, B00000, B00000, B00000 };
+byte frameA_0_1[] = { B00011, B00100, B01000, B01110, B10011, B10011, B01100, B00110 };
+byte frameA_0_2[] = { B11110, B00001, B00000, B00101, B00100, B00010, B00111, B00000 };
+byte frameA_0_3[] = { B01110, B10001, B01001, B11010, B00010, B00010, B11100, B00100 };
+byte frameA_1_0[] = { B00000, B00000, B00001, B00001, B00000, B00001, B00001, B00000 };
+byte frameA_1_1[] = { B01000, B11100, B00010, B00010, B11111, B00010, B00100, B11011 };
+byte frameA_1_2[] = { B00001, B00000, B01000, B10000, B00000, B00110, B01100, B10000 };
+byte frameA_1_3[] = { B01000, B11110, B01001, B10001, B10010, B10010, B01100, B00000 };
+
+// --- FRAME B (Imagem 2) ---
+byte frameB_0_1[] = { B00000, B00001, B00010, B00011, B00100, B00100, B00011, B00011 };
+byte frameB_0_2[] = { B11111, B00000, B00000, B10010, B11010, B11001, B00011, B10000 };
+byte frameB_0_3[] = { B00000, B11100, B00010, B11100, B00010, B00010, B11100, B01000 };
+byte frameB_1_1[] = { B01100, B10000, B10000, B01001, B00110, B01001, B01000, B01111 };
+byte frameB_1_2[] = { B00000, B00000, B01000, B10000, B00000, B01101, B10010, B10011 };
+byte frameB_1_3[] = { B11100, B01010, B01001, B01101, B10010, B00010, B00100, B11100 };
+
+// --- FRAME C (Imagem 3) ---
+byte frameC_0_2[] = { B11110, B00001, B00000, B01011, B01000, B00100, B01111, B00001 };
+byte frameC_0_3[] = { B00000, B10000, B01000, B10000, B01000, B01000, B10000, B00000 };
+byte frameC_1_1[] = { B01001, B01000, B10000, B10011, B01100, B01000, B01111, B00000 };
+byte frameC_1_2[] = { B00010, B10001, B10001, B00001, B01000, B11000, B11111, B00000 };
+byte frameC_1_3[] = { B10000, B01000, B01000, B10000, B10000, B10000, B10000, B00000 };
+
 // ********************************************
 // SETUP
 // ********************************************
@@ -101,7 +128,7 @@ void setup() {
     //RTC.adjust(DateTime(F(__DATE__), F(__TIME__))); // Set time once
 
     lcd.clear();
-    lcd.print("Inicializando...");
+    desenhaMario();
     delay(1000);
 
     // ** menu **
@@ -165,6 +192,57 @@ void loop() {
             default: break; // Parent menus will fall here and do nothing
         }
     }
+}
+
+// Variável para controlar qual frame (0, 1 ou 2) será exibida
+int frameIndex = 0;
+
+//animacao metodo
+void desenhaMario() {
+  // O loop controla a posição da imagem na tela, da esquerda para a direita
+  for (int posicao = -4; posicao < 16; posicao++) {
+
+    // 1. SELECIONA E CARREGA o frame ANTES de desenhar este passo do movimento
+    if (frameIndex == 0)      { loadFrameA(); } 
+    else if (frameIndex == 1) { loadFrameB(); } 
+    else                      { loadFrameC(); }
+
+    lcd.clear();
+
+    // 2. DESENHA o frame que foi carregado na posição atual
+    byte topRowChars[] = {0, 1, 2, 3};
+    byte bottomRowChars[] = {4, 5, 6, 7};
+
+    for (int j = 0; j < 4; j++) {
+      int colunaNaTela = posicao + j;
+      if (colunaNaTela >= 0 && colunaNaTela < 16) {
+        lcd.setCursor(colunaNaTela, 0); lcd.write(topRowChars[j]);
+        lcd.setCursor(colunaNaTela, 1); lcd.write(bottomRowChars[j]);
+      }
+    }
+    
+    // 3. AVANÇA o índice para que o PRÓXIMO PASSO do movimento use a PRÓXIMA IMAGEM
+    frameIndex = (frameIndex + 1) % 3;
+    
+    // Controla a velocidade geral da animação
+    delay(200); 
+  }
+ }
+
+// --- Funções para carregar cada frame na memória do LCD ---
+void loadFrameA() {
+  lcd.createChar(0, frameA_0_0); lcd.createChar(1, frameA_0_1); lcd.createChar(2, frameA_0_2); lcd.createChar(3, frameA_0_3);
+  lcd.createChar(4, frameA_1_0); lcd.createChar(5, frameA_1_1); lcd.createChar(6, frameA_1_2); lcd.createChar(7, frameA_1_3);
+}
+
+void loadFrameB() {
+  lcd.createChar(0, frameA_0_0); lcd.createChar(1, frameB_0_1); lcd.createChar(2, frameB_0_2); lcd.createChar(3, frameB_0_3);
+  lcd.createChar(4, frameA_1_0); lcd.createChar(5, frameB_1_1); lcd.createChar(6, frameB_1_2); lcd.createChar(7, frameB_1_3);
+}
+
+void loadFrameC() {
+  lcd.createChar(0, frameA_0_0); lcd.createChar(1, frameA_0_1); lcd.createChar(2, frameC_0_2); lcd.createChar(3, frameC_0_3);
+  lcd.createChar(4, frameA_1_0); lcd.createChar(5, frameC_1_1); lcd.createChar(6, frameC_1_2); lcd.createChar(7, frameC_1_3);
 }
 
 // ********************************************
