@@ -60,6 +60,9 @@ Este projeto consiste em um dispositivo de registro de dados (data logger) dedic
 | Joystick (Eixo X) | `A0` |
 | Sensor LDR | `A2` |
 
+<img width="983" height="868" alt="image" src="https://github.com/user-attachments/assets/f29fc13e-2b62-43e9-8f06-a86e41a147e8" />
+
+
 -----
 
 ## 🚀 Como Funciona
@@ -68,9 +71,9 @@ Este projeto consiste em um dispositivo de registro de dados (data logger) dedic
 
 O `loop()` principal verifica os sensores a cada minuto. Os valores de temperatura, umidade e luminosidade são comparados com as faixas de operação seguras (triggers):
 
-  * **Faixa de Temperatura**: $15 °C \< T \< 25 °C
-  * **Faixa de Umidade**: $30% \< U \< 50%$
-  * **Faixa de Luminosidade**: $0 \< L \< 30%$ (valor máximo ajustável)
+  * **Faixa de Temperatura**: 15 °C \< T \< 25 °C
+  * **Faixa de Umidade**: 30% \< U \< 50%
+  * **Faixa de Luminosidade**: 0 \< L \< 30% (valor máximo ajustável)
 
 Se qualquer medição estiver fora desses limites, a função `handleAlarm()` é chamada, ativando o **LED vermelho** e o **buzzer**. Caso contrário, o **LED verde** permanece aceso.
 
@@ -94,6 +97,9 @@ O usuário navega pelo menu usando um joystick e dois botões (`Entra` e `Volta`
       * **2.1 Hum e Temp**: Mostra as leituras atuais dos sensores no display.
       * **2.2 Ajuste Luz**: Permite aumentar ou diminuir o valor máximo do trigger de luminosidade.
   * **3. Ver Log**: Envia todos os registros armazenados na EEPROM para o **Monitor Serial** do Arduino IDE, formatados de maneira legível.
+
+### Video demonstrativo
+ https://youtube.com/shorts/Jy3Repk7K6I?si=oD8lZE54iMaD-ZcR
 
 -----
 
@@ -132,3 +138,4 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
   * **Gustavo Sgrignoli Marmo** - [@gustavomarmo](https://github.com/gustavomarmo)
   * **Leonardo Rosario Teixeira** - [@leonardorosario](https://github.com/leonardorosario)
   * **Ryan Corazza Alvarenga** - [@aishiterai](https://github.com/aishiteirai)
+  * **Bianca Ricci Lima** - [@biaricci](https://github.com/biaricci)
